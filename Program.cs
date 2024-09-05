@@ -1,13 +1,15 @@
 using feature_flag_manager_backend.Data;
+using feature_flag_manager_backend.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<FeatureFlagService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "my_books", Version = "v1" }));
+builder.Services.AddSwaggerGen();
 
 // Configure DbContext with sql
 var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
@@ -19,7 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "my_books v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "feature_flag_manager v1"));
 }
 
 app.UseHttpsRedirection();
