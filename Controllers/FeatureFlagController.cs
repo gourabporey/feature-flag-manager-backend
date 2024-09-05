@@ -22,8 +22,8 @@ public class FeatureFlagController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetFeatureFlags()
+    public IEnumerable<FeatureFlag> GetFeatureFlags()
     {
-        return Ok("All feature flags");
+        return _featureFlagService.GetAllFeatureFlags();
     }
 }

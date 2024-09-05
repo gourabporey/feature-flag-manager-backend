@@ -31,4 +31,9 @@ public class FeatureFlagService
 
         return _featureFlag;
     }
+
+    public IEnumerable<FeatureFlag> GetAllFeatureFlags()
+    {
+        return _context.FeatureFlags;
+    }
 }
